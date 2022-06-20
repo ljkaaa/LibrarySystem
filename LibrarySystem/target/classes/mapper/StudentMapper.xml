@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.StudentMapper">
+    <insert id="insert">
+        insert into t_student values (#{id},#{name},#{gender},#{age},#{institute},#{phone},#{password})
+    </insert>
+
+    <delete id="delete">
+        delete from t_student where Id=#{id}
+    </delete>
+
+    <update id="update">
+        update t_student set name=#{name},gender=#{gender},age=#{age},institute=#{institute},
+                          phone=#{phone},password=#{password}
+                where Id=#{id}
+    </update>
+
+    <select id="queryById" resultType="Student">
+        select * from t_student where Id=#{id}
+    </select>
+
+    <select id="queryByName" resultType="Student">
+        select * from t_student where name like
+                                    concat('%',#{name},'%')
+    </select>
+
+    <select id="queryAllStudents" resultType="Student">
+        select * from t_student
+    </select>
+</mapper>

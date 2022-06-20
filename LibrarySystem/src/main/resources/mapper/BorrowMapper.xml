@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.BorrowMapper">
+    <insert id="insert">
+        insert into t_borrow values(#{sId},#{barCode},#{borrowDate},#{returnDate},#{isReturn})
+    </insert>
+
+    <delete id="delete">
+        delete from t_borrow where sId=#{sId} and barCode=#{barCode}
+    </delete>
+
+    <update id="update">
+        update t_borrow set borrowDate=#{borrowDate},returnDate=#{returnDate},isReturn=#{isReturn}
+                          where sId=#{sId} and barCode=#{barCode}
+    </update>
+
+    <select id="queryOneRecord" resultType="Borrow">
+        select * from t_borrow where sId=#{sId} and barCode=#{barCode}
+    </select>
+
+    <select id="queryBySId" resultType="Borrow">
+        select * from t_borrow where sId=#{sId}
+    </select>
+
+    <select id="queryRecordsByBorrowDate" resultType="Borrow">
+        select * from t_borrow where borrowDate >= #{borrowDate1}
+                                and #{borrowDate2} >= borrowDate
+    </select>
+
+    <select id="queryOvertimeRecords" resultType="Borrow">
+        select * from t_borrow where #{date} > returnDate and isReturn = '否' ;
+    </select>
+
+    <select id="queryAllBorrowRecords" resultType="Borrow">
+        select * from t_borrow
+    </select>
+
+    <select id="queryAllNotReturnBook" resultType="Borrow">
+        select * from t_borrow where isReturn='否'
+    </select>
+
+</mapper>

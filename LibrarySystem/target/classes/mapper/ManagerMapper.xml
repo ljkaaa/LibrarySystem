@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.ManagerMapper">
+    <insert id="insert">
+        insert into t_mamager values (#{id},#{name},#{gender},#{age},
+                                      #{phone},#{password})
+    </insert>
+
+    <delete id="delete">
+        delete from t_mamager where Id=#{id}
+    </delete>
+
+    <update id="update">
+        update t_mamager set name=#{name},gender=#{gender},age=#{age},
+                             phone=#{phone},password=#{password}
+        where Id=#{id}
+    </update>
+
+    <select id="queryById" resultType="Manager">
+        select * from t_mamager where Id=#{id}
+    </select>
+
+    <select id="queryByName" resultType="Manager">
+        select * from t_mamager where name like
+                                      concat('%',#{name},'%')
+    </select>
+
+    <select id="queryAllManagers" resultType="Manager">
+        select * from t_mamager
+    </select>
+</mapper>
